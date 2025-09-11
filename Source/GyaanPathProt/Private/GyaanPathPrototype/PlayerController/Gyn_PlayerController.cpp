@@ -2,9 +2,9 @@
 
 
 #include "GyaanPathPrototype/PlayerController/Gyn_PlayerController.h"
-
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "GyaanPathPrototype/Hud/Cursor/Gyn_WorldCursor.h"
 
 AGyn_PlayerController::AGyn_PlayerController()
 {
@@ -23,7 +23,8 @@ void AGyn_PlayerController::BeginPlay()
 	 {
 		 Subsystem->AddMappingContext(CurrentMappingContext,0);
 	 }
-	
+	//obviously our cursor is going to be created in the starting of the game
+	createCursor();
 }
 
 void AGyn_PlayerController::SetupInputComponent()
@@ -38,6 +39,16 @@ void AGyn_PlayerController::SetupInputComponent()
 void AGyn_PlayerController::PrimaryActionFunction()
 {
 	UE_LOG(LogTemp,Log,TEXT("E pressed for PrimaryAction"));
+}
+
+void AGyn_PlayerController::createCursor()
+{
+	//as we don't want the Sever Player Controller To take Control
+	if (!IsLocalPlayerController()) return;
+	TObjectPtr<UGyn_WorldCursor> Cursor=CreateWidget<UGyn_WorldCursor>(this,CursorClass);
+	if (!IsValid(Cursor)) return;
+	Cursor->AddToViewport();
+	
 }
 
 
