@@ -21,7 +21,7 @@ public class GyaanPathProt : ModuleRules
 			"Slate"
 		});
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+		PrivateDependencyModuleNames.AddRange(new string[] { "EnhancedInput","UMG"});
 
 		PublicIncludePaths.AddRange(new string[] {
 			"GyaanPathProt",
