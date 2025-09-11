@@ -27,6 +27,10 @@ public:
 
 	//generally understand that to create the widget we use a function nd then set it for begin play
 	void createCursor();
+
+	void TraceforObjects();
+
+	virtual void Tick(float DeltaTime) override;
 protected:
 
  virtual void BeginPlay() override;
@@ -44,6 +48,13 @@ private:
 	// for the dynamic creation of the cursor widget
 	UPROPERTY(EditAnywhere,Category="Input")
 	TSubclassOf<UGyn_WorldCursor> CursorClass;
-	
-    
+
+	UPROPERTY(EditAnywhere,Category="Input")
+	float TraceLength;
+
+	TWeakObjectPtr<AActor> LastActor;
+	TWeakObjectPtr<AActor> CurrentActor;
+
+	UPROPERTY(EditAnywhere,Category="Input")
+	TEnumAsByte<ECollisionChannel> TraceChannel;	
 };

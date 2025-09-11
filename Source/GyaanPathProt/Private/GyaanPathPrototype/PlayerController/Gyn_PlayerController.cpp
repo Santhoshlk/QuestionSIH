@@ -5,10 +5,15 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "GyaanPathPrototype/Hud/Cursor/Gyn_WorldCursor.h"
+#include "Kismet/GameplayStatics.h"
 
 AGyn_PlayerController::AGyn_PlayerController()
 {
-  
+	//initialize it to some value in the constructor
+   TraceLength=500.f;
+	//because trace is done every trick
+	PrimaryActorTick.bCanEverTick = true;
+	
 }
 
 
@@ -49,6 +54,54 @@ void AGyn_PlayerController::createCursor()
 	if (!IsValid(Cursor)) return;
 	Cursor->AddToViewport();
 	
+}
+
+void AGyn_PlayerController::TraceforObjects()
+{
+	if (!IsLocalPlayerController()) return;
+	if (!IsValid(GetWorld()) || !IsValid(GetWorld()->GetGameViewport())) return;
+	FVector2D ViewportSize;
+	GetWorld()->GetGameViewport()->GetViewportSize(ViewportSize);
+	//to get the world Cursor u need the screens midpoint as the world cursor is in the middle of the screen
+	FVector2D ViewportCenter=ViewportSize/2.f;
+	FVector Direction;
+	FVector TraceStart;
+	//deproject from screen to world to get coordinates of the world
+	//remember if & symbol comes then it is giving out referencing so it is taking viewport center and giving out position and Direction.
+	if (UGameplayStatics::DeprojectScreenToWorld(this,ViewportCenter, TraceStart,Direction))
+	{
+		//have a hit result struct to get the output of trace
+		FHitResult HitResult;
+		//trace end
+		FVector TraceEnd=TraceStart+Direction*TraceLength;
+		//if this is true then only trace
+		//to take ur custom collision channnel take l1
+		GetWorld()->LineTraceSingleByChannel(HitResult,TraceStart,TraceEnd,TraceChannel);
+		//take a weak pointer of  AActor to denote the actor changing
+		LastActor=CurrentActor;
+		//so ur going to get the actor
+		CurrentActor=HitResult.GetActor();
+          if (!LastActor.IsValid() && !CurrentActor.IsValid()) return;
+		if (LastActor==CurrentActor) return;
+
+		if (LastActor.IsValid())
+		{
+			UE_LOG(LogTemp,Log,TEXT("	Now Not Tracing Any Item"));
+		}
+
+		if (CurrentActor.IsValid())
+		{
+			UE_LOG(LogTemp,Log,TEXT(" New object has been Traced"));
+		}
+	}
+	
+}
+
+void AGyn_PlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	TraceforObjects();
 }
 
 
