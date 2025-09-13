@@ -6,6 +6,9 @@
 #include "Gyn_QuestionBase.h"
 #include "Gyn_SpatialQuestion.generated.h"
 
+class UTextBlock;
+class UButton;
+class AGyn_PlayerController;
 /**
  * 
  */
@@ -13,4 +16,36 @@ UCLASS()
 class GYAANPATHPROT_API UGyn_SpatialQuestion : public UGyn_QuestionBase
 {
 	GENERATED_BODY()
+public:
+	virtual void NativeOnInitialized() override;
+	//TO use this u need an Macro of U function
+	UFUNCTION()
+	void OptionAClicked();
+	UFUNCTION()
+	void OptionBClicked();
+	UFUNCTION()
+	void OptionCClicked();
+	UFUNCTION()
+	void OptionDClicked();
+
+	void getPlayerController();
+private:
+	//First of all Make 1 Text
+	//4 buttons
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UButton> OptionA;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UButton> OptionB;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UButton> OptionC;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UButton> OptionD;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> Question;
+
+	TWeakObjectPtr<AGyn_PlayerController> PC;
 };
