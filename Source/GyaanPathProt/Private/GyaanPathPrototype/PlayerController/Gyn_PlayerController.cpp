@@ -13,7 +13,7 @@ AGyn_PlayerController::AGyn_PlayerController()
    TraceLength=500.f;
 	//because trace is done every trick
 	PrimaryActorTick.bCanEverTick = true;
-	
+	TraceChannel=ECC_GameTraceChannel1;
 }
 
 
