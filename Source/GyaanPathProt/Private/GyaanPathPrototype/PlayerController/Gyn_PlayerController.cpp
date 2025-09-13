@@ -4,6 +4,7 @@
 #include "GyaanPathPrototype/PlayerController/Gyn_PlayerController.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "GyaanPathPrototype/Components/Gyn_QuestionComponent.h"
 #include "GyaanPathPrototype/Hud/Cursor/Gyn_WorldCursor.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -30,6 +31,12 @@ void AGyn_PlayerController::BeginPlay()
 	 }
 	//obviously our cursor is going to be created in the starting of the game
 	createCursor();
+	//get the Question Component from the blueprint of playerController
+	QuestionComponent=FindComponentByClass<UGyn_QuestionComponent>();
+	if (!QuestionComponent.IsValid()) 
+	{
+		UE_LOG(LogTemp,Log,TEXT("The question Component is Invalid"));
+	}
 }
 
 void AGyn_PlayerController::SetupInputComponent()
@@ -56,7 +63,7 @@ void AGyn_PlayerController::createCursor()
 	
 }
 
-void AGyn_PlayerController::TraceforObjects()
+void AGyn_PlayerController::TraceForObjects()
 {
 	if (!IsLocalPlayerController()) return;
 	if (!IsValid(GetWorld()) || !IsValid(GetWorld()->GetGameViewport())) return;
@@ -91,7 +98,7 @@ void AGyn_PlayerController::TraceforObjects()
 
 		if (CurrentActor.IsValid())
 		{
-			UE_LOG(LogTemp,Log,TEXT(" New object has been Traced"));
+			OpenTheQuestion();
 		}
 	}
 	
@@ -101,7 +108,19 @@ void AGyn_PlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	TraceforObjects();
+	TraceForObjects();
+}
+
+void AGyn_PlayerController::CloseTheQuestion()
+{
+	if (!QuestionComponent.IsValid()) return;
+	QuestionComponent->closeQuestion();
+}
+
+void AGyn_PlayerController::OpenTheQuestion()
+{
+	if (!QuestionComponent.IsValid()) return;
+	QuestionComponent->OpenQuestion();
 }
 
 

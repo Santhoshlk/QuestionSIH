@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Gyn_PlayerController.generated.h"
 
+class UGyn_QuestionComponent;
 /**
  * 
  */
@@ -28,9 +29,15 @@ public:
 	//generally understand that to create the widget we use a function nd then set it for begin play
 	void createCursor();
 
-	void TraceforObjects();
+	void TraceForObjects();
 
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION(BlueprintCallable)
+	void CloseTheQuestion();
+
+	UFUNCTION(BlueprintCallable)
+	void OpenTheQuestion();
 protected:
 
  virtual void BeginPlay() override;
@@ -56,5 +63,8 @@ private:
 	TWeakObjectPtr<AActor> CurrentActor;
 
 	UPROPERTY(EditAnywhere,Category="Input")
-	TEnumAsByte<ECollisionChannel> TraceChannel;	
+	TEnumAsByte<ECollisionChannel> TraceChannel;
+
+	//create a weak object to actually allow the player controller to access the question
+	TWeakObjectPtr<UGyn_QuestionComponent> QuestionComponent;
 };

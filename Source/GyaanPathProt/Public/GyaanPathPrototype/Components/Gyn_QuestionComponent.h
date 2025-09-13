@@ -2,6 +2,8 @@
 
 #pragma once
 
+
+
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Gyn_QuestionComponent.generated.h"
@@ -18,13 +20,15 @@ public:
 	UGyn_QuestionComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 							   FActorComponentTickFunction* ThisTickFunction) override;
-
+	void closeQuestion();
+	void OpenQuestion();
 protected:
 	
 	virtual void BeginPlay() override;
 
 private:
      void CreateQuestion();
+	
    //to use create widget we need the owner u can get the owner by casting to get owner
 	   TWeakObjectPtr<APlayerController> Owner;
 	
@@ -36,5 +40,7 @@ private:
 	// just have UPROPERTY To avoid Garbage Collection
 	UPROPERTY()
 	TObjectPtr<UGyn_QuestionBase> Question;
-	
+
+	UPROPERTY(meta=(AllowPrivateAccess="true"),BlueprintReadOnly,Category="Question")
+	bool IsTheQuestionOpen;
 };
