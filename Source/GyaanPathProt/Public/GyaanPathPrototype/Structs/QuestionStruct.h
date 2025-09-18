@@ -7,7 +7,7 @@
 USTRUCT(BlueprintType)
 struct FQuestionRow:public FTableRowBase
 {
-	GENERATED_BODY();
+	GENERATED_BODY()
 public:
 	//create the required things for the question
 	UPROPERTY(EditAnywhere,BlueprintReadOnly)
