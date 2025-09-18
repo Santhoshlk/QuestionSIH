@@ -17,8 +17,9 @@ class GYAANPATHPROT_API UGyn_SpatialQuestion : public UGyn_QuestionBase
 {
 	GENERATED_BODY()
 public:
+	virtual void NativeConstruct() override;
 	virtual void NativeOnInitialized() override;
-	//TO use this u need an Macro of U function
+	//TO use this u need a Macro of U function
 	UFUNCTION()
 	void OptionAClicked();
 	UFUNCTION()
@@ -58,7 +59,15 @@ private:
 	TObjectPtr<UTextBlock> OptionDText;
 
 	UPROPERTY(meta=(BindWidget))
-	TObjectPtr<UTextBlock> Question;
+	TObjectPtr<UTextBlock> CurrentQuestion;
 
 	TWeakObjectPtr<AGyn_PlayerController> PC;
+
+
+	//create an object for the datatable
+	UPROPERTY(EditAnywhere,Category="Input")
+	TObjectPtr<UDataTable> QuestionDataTable;
+	
+	
+	
 };

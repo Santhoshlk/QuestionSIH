@@ -4,6 +4,44 @@
 #include "GyaanPathPrototype/Hud/QuestionScreen/Gyn_SpatialQuestion.h"
 #include "GyaanPathPrototype/PlayerController/Gyn_PlayerController.h"
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
+#include "QuestionStruct.h"
+
+void UGyn_SpatialQuestion::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	//First check if the question table is valid
+	if (IsValid(QuestionDataTable))
+	{
+		//u cannot create an object of the data type and sheet u can only look at them through a pointer
+		//for find row give a FName from RowName and then ContextString it is just a debug helper
+		FQuestionRow* QuestionRow=QuestionDataTable->FindRow<FQuestionRow>(FName(TEXT("Q1")),FString(TEXT("The Question Which we were searching is found")));
+		if (QuestionRow)
+		{
+			if (IsValid(CurrentQuestion))
+			{
+				CurrentQuestion->SetText(FText::FromString(QuestionRow->Question));
+			}
+			if (IsValid(OptionAText))
+			{
+				OptionAText->SetText(FText::FromString(QuestionRow->AOption));
+			}
+			if (IsValid(OptionBText))
+			{
+				OptionBText->SetText(FText::FromString(QuestionRow->BOption));
+			}
+			if (IsValid(OptionCText))
+			{
+				OptionCText->SetText(FText::FromString(QuestionRow->COption));
+			}
+			if (IsValid(OptionDText))
+			{
+				OptionDText->SetText(FText::FromString(QuestionRow->DOption));
+			}
+		}
+	}
+}
 
 void UGyn_SpatialQuestion::NativeOnInitialized()
 {
