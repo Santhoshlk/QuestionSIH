@@ -44,6 +44,19 @@ private:
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UButton> OptionD;
 
+	//CREATE all the required text so that we can bind them for the Blueprint
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> OptionAText;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> OptionBText;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> OptionCText;
+
+	UPROPERTY(meta=(BindWidget))
+	TObjectPtr<UTextBlock> OptionDText;
+
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UTextBlock> Question;
 
