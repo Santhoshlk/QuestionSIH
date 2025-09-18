@@ -69,5 +69,5 @@ private:
 	TObjectPtr<UDataTable> QuestionDataTable;
 	
 	
-	
+	int32 Answer;
 };

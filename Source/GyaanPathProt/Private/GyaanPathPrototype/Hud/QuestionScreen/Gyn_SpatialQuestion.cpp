@@ -39,6 +39,7 @@ void UGyn_SpatialQuestion::NativeConstruct()
 			{
 				OptionDText->SetText(FText::FromString(QuestionRow->DOption));
 			}
+			Answer=QuestionRow->AnswerIndex;
 		}
 	}
 }
@@ -56,22 +57,34 @@ void UGyn_SpatialQuestion::NativeOnInitialized()
 
 void UGyn_SpatialQuestion::OptionAClicked()
 {
-	UE_LOG(LogTemp,Log,TEXT("Option A is clicked"))
+	if (Answer==1)
+	{
+		PC->CloseTheQuestion();
+	}
 }
 
 void UGyn_SpatialQuestion::OptionBClicked()
 {
-	PC->CloseTheQuestion();
+	if (Answer==2)
+	{
+		PC->CloseTheQuestion();
+	}
 }
 
 void UGyn_SpatialQuestion::OptionCClicked()
 {
-	UE_LOG(LogTemp,Log,TEXT("Option C is clicked"))
+	if (Answer==3)
+	{
+		PC->CloseTheQuestion();
+	}
 }
 
 void UGyn_SpatialQuestion::OptionDClicked()
 {
-	UE_LOG(LogTemp,Log,TEXT("Option D is clicked"))
+	if (Answer==4)
+	{
+		PC->CloseTheQuestion();
+	}
 }
 
 void UGyn_SpatialQuestion::getPlayerController()
