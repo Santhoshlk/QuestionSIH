@@ -29,7 +29,7 @@ public:
 	UFUNCTION()
 	void OptionDClicked();
 
-	void getPlayerController();
+	
 private:
 	//First of all Make 1 Text
 	//4 buttons
@@ -61,6 +61,7 @@ private:
 	UPROPERTY(meta=(BindWidget))
 	TObjectPtr<UTextBlock> CurrentQuestion;
 
+	
 	TWeakObjectPtr<AGyn_PlayerController> PC;
 
 
@@ -68,6 +69,9 @@ private:
 	UPROPERTY(EditAnywhere,Category="Input")
 	TObjectPtr<UDataTable> QuestionDataTable;
 	
-	
+	UPROPERTY(EditAnywhere,Category="Input")
+	FName QuestionNane;
 	int32 Answer;
+
+	int32 Attribute;
 };

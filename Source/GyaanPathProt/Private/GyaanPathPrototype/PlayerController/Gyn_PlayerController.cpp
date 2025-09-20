@@ -8,6 +8,7 @@
 #include "GyaanPathPrototype/Hud/Cursor/Gyn_WorldCursor.h"
 #include "Kismet/GameplayStatics.h"
 
+
 AGyn_PlayerController::AGyn_PlayerController()
 {
 	//initialize it to some value in the constructor
@@ -98,7 +99,9 @@ void AGyn_PlayerController::TraceForObjects()
 
 		if (CurrentActor.IsValid())
 		{
+			
 			OpenTheQuestion();
+			
 		}
 	}
 	
@@ -122,5 +125,9 @@ void AGyn_PlayerController::OpenTheQuestion()
 	if (!QuestionComponent.IsValid()) return;
 	QuestionComponent->OpenQuestion();
 }
+
+
+
+
 
 

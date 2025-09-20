@@ -13,6 +13,7 @@ class UGyn_QuestionComponent;
 class UInputAction;
 class UInputMappingContext;
 class UGyn_WorldCursor;
+class UGyn_ItemComponent;
 UCLASS()
 
 class GYAANPATHPROT_API AGyn_PlayerController : public APlayerController
@@ -38,6 +39,8 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void OpenTheQuestion();
+
+	
 protected:
 
  virtual void BeginPlay() override;
@@ -62,9 +65,14 @@ private:
 	TWeakObjectPtr<AActor> LastActor;
 	TWeakObjectPtr<AActor> CurrentActor;
 
+	UPROPERTY()
+	TObjectPtr<AActor> Actor;
+
 	UPROPERTY(EditAnywhere,Category="Input")
 	TEnumAsByte<ECollisionChannel> TraceChannel;
 
 	//create a weak object to actually allow the player controller to access the question
 	TWeakObjectPtr<UGyn_QuestionComponent> QuestionComponent;
+
+	TWeakObjectPtr<UGyn_ItemComponent> ItemComponent;
 };
