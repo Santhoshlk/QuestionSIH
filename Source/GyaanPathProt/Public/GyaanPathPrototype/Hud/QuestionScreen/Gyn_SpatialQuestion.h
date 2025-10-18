@@ -29,6 +29,8 @@ public:
 	UFUNCTION()
 	void OptionDClicked();
 
+   UFUNCTION(BlueprintCallable)
+	void Close();
 	
 private:
 	//First of all Make 1 Text

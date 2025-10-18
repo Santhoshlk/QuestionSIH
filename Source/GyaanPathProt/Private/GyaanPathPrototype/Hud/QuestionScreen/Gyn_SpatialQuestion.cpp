@@ -116,3 +116,11 @@ void UGyn_SpatialQuestion::OptionDClicked()
         }
     }
 }
+
+void UGyn_SpatialQuestion::Close()
+{
+   if (PC.IsValid())
+   {
+       PC->CloseTheQuestion();
+   }
+}
