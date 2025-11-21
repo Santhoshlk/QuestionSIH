@@ -30,7 +30,7 @@ void UGyn_QuestionComponent::CreateQuestion()
 	Question=CreateWidget<UGyn_QuestionBase>(Owner.Get(),QuestionClass);
 	if (!IsValid(Question)) return;
 	Question->AddToViewport();
-	//as u make the object first set its visbility to collapsed
+	//as u make the object first set its visibility to collapsed
 	Question->SetVisibility(ESlateVisibility::Collapsed);
 }
 
@@ -43,7 +43,7 @@ void UGyn_QuestionComponent::closeQuestion()
 	IsTheQuestionOpen=false ;
 	//set the visibility of the object
 	Question->SetVisibility(ESlateVisibility::Collapsed);
-	//next set the mouse to dissapera
+	//next set the mouse to disappear
 	//u can do that with a player controller and then using a struct to override every thing
 	FInputModeGameAndUI Input;
 	Owner->SetInputMode(Input);
