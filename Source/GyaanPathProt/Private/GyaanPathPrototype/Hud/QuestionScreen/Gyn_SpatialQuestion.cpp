@@ -3,6 +3,8 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "QuestionStruct.h"
+#include "GyaanPathProtCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 void UGyn_SpatialQuestion::NativeOnInitialized()
 {
@@ -16,6 +18,13 @@ void UGyn_SpatialQuestion::NativeOnInitialized()
     if (OptionB) OptionB->OnClicked.AddDynamic(this, &UGyn_SpatialQuestion::OptionBClicked);
     if (OptionC) OptionC->OnClicked.AddDynamic(this, &UGyn_SpatialQuestion::OptionCClicked);
     if (OptionD) OptionD->OnClicked.AddDynamic(this, &UGyn_SpatialQuestion::OptionDClicked);
+
+    //we need to cast to our character
+    MyCharacter = Cast<AGyaanPathProtCharacter>(GetOwningPlayerPawn());
+    if (IsValid(MyCharacter))
+    {
+        Movement=MyCharacter->GetCharacterMovement();
+    }
 }
 
 void UGyn_SpatialQuestion::NativeConstruct()
@@ -71,6 +80,14 @@ void UGyn_SpatialQuestion::OptionAClicked()
             FString Message = FString::Printf(TEXT("Attribute Value is %d"),Attribute);
             GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Green,Message);
         }
+        if (Movement)
+        {
+            Movement->MaxWalkSpeed+=150.f;
+        }
+        if (GEngine)
+        {
+            GEngine->AddOnScreenDebugMessage(1,1.f,FColor::Green,TEXT("The Max Walking Speed has been Increased"));
+        }
     }
 }
 
@@ -85,6 +102,14 @@ void UGyn_SpatialQuestion::OptionBClicked()
         {
             FString Message = FString::Printf(TEXT("Attribute Value is %d"),Attribute);
             GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Green,Message);
+        }
+        if (Movement)
+        {
+            Movement->MaxWalkSpeed+=150.f;
+        }
+        if (GEngine)
+        {
+            GEngine->AddOnScreenDebugMessage(1,1.f,FColor::Green,TEXT("The Max Walking Speed has been Increased"));
         }
     }
 }
@@ -101,6 +126,14 @@ void UGyn_SpatialQuestion::OptionCClicked()
             GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Green,Message);
         }
     }
+    if (Movement)
+    {
+        Movement->MaxWalkSpeed+=150.f;
+    }
+    if (GEngine)
+    {
+        GEngine->AddOnScreenDebugMessage(1,1.f,FColor::Green,TEXT("The Max Walking Speed has been Increased"));
+    }
 }
 
 void UGyn_SpatialQuestion::OptionDClicked()
@@ -114,6 +147,14 @@ void UGyn_SpatialQuestion::OptionDClicked()
             FString Message = FString::Printf(TEXT("Attribute Value is %d"),Attribute);
             GEngine->AddOnScreenDebugMessage(0,5.f,FColor::Green,Message);
         }
+    }
+    if (Movement)
+    {
+        Movement->MaxWalkSpeed+=150.f;
+    }
+    if (GEngine)
+    {
+        GEngine->AddOnScreenDebugMessage(1,1.f,FColor::Green,TEXT("The Max Walking Speed has been Increased"));
     }
 }
 

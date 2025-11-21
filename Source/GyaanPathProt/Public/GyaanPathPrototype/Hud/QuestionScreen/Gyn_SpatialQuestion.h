@@ -6,6 +6,8 @@
 #include "Gyn_QuestionBase.h"
 #include "Gyn_SpatialQuestion.generated.h"
 
+class UCharacterMovementComponent;
+class AGyaanPathProtCharacter;
 class UTextBlock;
 class UButton;
 class AGyn_PlayerController;
@@ -76,4 +78,10 @@ private:
 	int32 Answer;
 
 	int32 Attribute;
+
+	UPROPERTY()
+	TObjectPtr<AGyaanPathProtCharacter> MyCharacter;
+
+	UPROPERTY()
+	TObjectPtr<UCharacterMovementComponent> Movement;
 };
