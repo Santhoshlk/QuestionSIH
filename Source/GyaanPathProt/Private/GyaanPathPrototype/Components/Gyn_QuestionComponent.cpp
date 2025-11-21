@@ -74,4 +74,3 @@ void UGyn_QuestionComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
 }
-
