@@ -43,4 +43,12 @@ private:
 
 	UPROPERTY(meta=(AllowPrivateAccess="true"),BlueprintReadOnly,Category="Question")
 	bool IsTheQuestionOpen;
+	
+ protected:
+  template <class T>
+	T* GetOwningPlayerController()
+	{
+  	  static_assert(TPointerIsConvertibleFromTo<T,APlayerController>::Value,"This pointer will be allowed to cast to a child or The class of APlayerController");
+  	   return Cast<T>(GetOwner());
+	}
 };

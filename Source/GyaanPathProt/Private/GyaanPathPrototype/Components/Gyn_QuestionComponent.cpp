@@ -25,7 +25,7 @@ void UGyn_QuestionComponent::BeginPlay()
 void UGyn_QuestionComponent::CreateQuestion()
 {
 	//get the owner
-	Owner=Cast<APlayerController>(GetOwner());
+	Owner=GetOwningPlayerController<APlayerController>();
 	if (!Owner.IsValid()) return;
 	Question=CreateWidget<UGyn_QuestionBase>(Owner.Get(),QuestionClass);
 	if (!IsValid(Question)) return;
